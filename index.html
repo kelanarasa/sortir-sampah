@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SORTIR SAMPAH</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="rotate"><div><span>↻</span><p>Putar perangkat ke posisi landscape atau gunakan layar penuh untuk bermain.</p><button data-fs="enter">⛶ LAYAR PENUH</button></div></div>
+<div id="stage">
+  <header id="hud">
+    <h1>♻️ SORTIR SAMPAH</h1>
+    <div id="level">LEVEL 1</div>
+    <div id="score">SCORE: 0</div>
+    <div id="lives" aria-label="Nyawa">❤️❤️❤️</div>
+    <div id="vhud">
+      <div class="vp p1"><span class="tag">P1</span><span class="lv">LEVEL 1</span><span class="sc">SCORE: 0</span><span class="lf">❤️❤️❤️</span></div>
+      <div class="vp p2"><span class="tag">P2</span><span class="lv">LEVEL 1</span><span class="sc">SCORE: 0</span><span class="lf">❤️❤️❤️</span></div>
+    </div>
+    <button id="home" title="Menu utama" aria-label="Menu utama">🏠</button>
+    <button id="mute" title="Musik on/off (M)" aria-label="Musik on/off">🎵</button>
+    <button id="fs" data-fs title="Layar penuh (F)" aria-label="Layar penuh">⛶</button>
+  </header>
+  <div id="boards"></div>
+
+  <div id="menu" class="overlay">
+    <div class="corner">
+      <button id="menuFs" class="cbtn" data-fs title="Layar penuh (F)" aria-label="Layar penuh">⛶</button>
+      <button id="menuMute" class="cbtn" title="Musik on/off (M)" aria-label="Musik on/off">🎵</button>
+    </div>
+    <div class="card menu-card">
+      <div class="menu-grid">
+        <section class="sb">
+          <h3>🏆 SCOREBOARD</h3>
+          <div class="sb-tabs">
+            <button class="tab active" data-sb="single">👤 1 PEMAIN</button>
+            <button class="tab" data-sb="versus">⚔️ VERSUS</button>
+          </div>
+          <div class="sb-head"><span>#</span><span>Nama</span><span>Skor</span><span>Akurasi</span></div>
+          <div id="sbList" class="sb-list"></div>
+        </section>
+        <section class="menu-right">
+          <h2>♻️ SORTIR SAMPAH</h2>
+          <p>Permainan edukasi memilah sampah dengan benar</p>
+          <div class="menu-btns">
+            <button id="start">▶ MULAI (1 PEMAIN)</button>
+            <button id="startVs" class="b-orange">⚔️ VERSUS (2 PEMAIN)</button>
+            <button id="btnHow" class="b-blue">📖 PETUNJUK PERMAINAN</button>
+            <button id="btnTypes" class="b-yellow">🗑️ INFORMASI JENIS SAMPAH</button>
+          </div>
+          <div class="credit">Developed by Kurnia Ichsan</div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div id="howto" class="overlay hidden">
+    <div class="panel">
+      <h2>📖 Petunjuk Permainan</h2>
+      <div class="tiles">
+        <div class="tile"><h3>🎯 Tujuan</h3><p>Arahkan setiap sampah yang jatuh ke tempat sampah yang sesuai dengan jenisnya sebelum sampah menyentuh dasar.</p></div>
+        <div class="tile"><h3>🎮 Cara Bermain</h3><p>🖱️ <b>Mouse:</b> gerakkan kursor ke kiri / kanan.<br>👆 <b>Layar sentuh:</b> sentuh &amp; geser.<br>⌨️ <b>Keyboard:</b> ← → (atau A D) untuk bergeser, ↓ (atau S) untuk jatuh cepat.</p></div>
+        <div class="tile"><h3>⭐ Skor &amp; Nyawa</h3><p>Sampah masuk tempat yang benar: <b>+10 poin</b>.<br>Salah: <b>−5 poin</b> dan kehilangan 1 nyawa ❤️.<br>Kamu punya 3 nyawa. Jika habis, permainan selesai.</p></div>
+        <div class="tile"><h3>📈 Level</h3><p>Level naik setiap 10 sampah yang benar, sampai level 5. Semakin tinggi levelnya, sampah jatuh makin cepat dan jenisnya makin beragam.</p></div>
+        <div class="tile wide"><h3>⚔️ Mode Versus (2 Pemain)</h3><p>Layar dibagi dua. <b>Pemain 1 (kiri):</b> A / D untuk bergeser, S jatuh cepat. <b>Pemain 2 (kanan):</b> ← / → untuk bergeser, ↓ jatuh cepat. Di layar sentuh, kedua pemain menggeser jari di sisi layarnya masing-masing secara bersamaan. Mouse tidak dipakai. Pemain yang nyawanya habis berhenti; pemenangnya adalah yang skornya paling tinggi.</p></div>
+        <div class="tile wide"><h3>💡 Tips</h3><p>Tempat sampah yang terangkat &amp; bersinar adalah tujuan jatuhnya sampah. Lihat nama sampah di pojok kanan atas, dan jika ragu, pelajari dulu menu <b>Informasi Jenis Sampah</b>. Tekan <b>M</b> untuk mematikan / menyalakan musik.</p></div>
+      </div>
+      <button class="close">TUTUP</button>
+    </div>
+  </div>
+
+  <div id="types" class="overlay hidden">
+    <div class="panel">
+      <h2>🗑️ Informasi Jenis Sampah</h2>
+      <div class="types">
+        <div class="type" style="--cc:#2e9e4f">
+          <h3>🍃 Organik</h3>
+          <h4>Arti</h4><p>Sampah dari makhluk hidup yang mudah terurai secara alami.</p>
+          <h4>Contoh</h4><p>Sisa makanan, kulit buah, daun kering.</p>
+          <h4>Mengapa dipisah?</h4><p>Bisa diolah menjadi kompos. Jika tercampur, cepat membusuk dan berbau.</p>
+        </div>
+        <div class="type" style="--cc:#f2b705">
+          <h3>♻️ Plastik / Logam</h3>
+          <h4>Arti</h4><p>Bahan plastik dan logam yang sulit terurai, tetapi dapat didaur ulang.</p>
+          <h4>Contoh</h4><p>Botol, kaleng, gelas dan kantong plastik.</p>
+          <h4>Mengapa dipisah?</h4><p>Bisa dijadikan barang baru dan tidak mencemari tanah maupun laut.</p>
+        </div>
+        <div class="type" style="--cc:#2f7de1">
+          <h3>📄 Kertas / Kardus</h3>
+          <h4>Arti</h4><p>Sampah berbahan serat kayu yang dapat didaur ulang.</p>
+          <h4>Contoh</h4><p>Koran, kardus, majalah, buku bekas.</p>
+          <h4>Mengapa dipisah?</h4><p>Kertas bersih dan kering bisa didaur ulang, sehingga mengurangi penebangan pohon.</p>
+        </div>
+        <div class="type" style="--cc:#d93636">
+          <h3>☣️ B3</h3>
+          <h4>Arti</h4><p>Bahan Berbahaya dan Beracun: mengandung zat kimia yang membahayakan manusia dan alam.</p>
+          <h4>Contoh</h4><p>Baterai, lampu, obat kedaluwarsa, cat, pestisida.</p>
+          <h4>Mengapa dipisah?</h4><p>Dapat meracuni tanah dan air, sehingga perlu penanganan khusus.</p>
+        </div>
+        <div class="type" style="--cc:#9aa3ad">
+          <h3>🚫 Residu</h3>
+          <h4>Arti</h4><p>Sampah sisa yang tidak bisa dikomposkan maupun didaur ulang.</p>
+          <h4>Contoh</h4><p>Tisu kotor, popok, puntung rokok, masker bekas.</p>
+          <h4>Mengapa dipisah?</h4><p>Hanya sampah jenis ini yang berakhir di TPA, sehingga timbunannya berkurang.</p>
+        </div>
+      </div>
+      <div class="why"><b>Mengapa sampah harus dipisahkan?</b> Sampah yang tercampur sulit diolah dan menumpuk di TPA. Dengan memilahnya, sampah organik menjadi kompos, sampah kering didaur ulang, sampah B3 tidak mencemari lingkungan, dan sumber daya alam lebih hemat.</div>
+      <button class="close">TUTUP</button>
+    </div>
+  </div>
+
+  <div id="nameDlg" class="overlay hidden">
+    <div class="card namecard">
+      <h2 id="ndTitle">Masukkan Namamu</h2>
+      <label class="nf p1"><span class="nt" id="ndL1">NAMA</span><input id="nm1" maxlength="12" autocomplete="off" spellcheck="false" placeholder="Ketik nama..."></label>
+      <label class="nf p2 hidden" id="nf2"><span class="nt">PEMAIN 2 · ← → ↓</span><input id="nm2" maxlength="12" autocomplete="off" spellcheck="false" placeholder="Ketik nama..."></label>
+      <div id="ndErr" class="nd-err"></div>
+      <div class="nd-btns">
+        <button id="ndGo">▶ MULAI</button>
+        <button id="ndCancel" class="b-gray">BATAL</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="overV" class="overlay hidden">
+    <div class="card">
+      <h2 id="vTitle"></h2>
+      <div class="vstats" id="vStats"></div>
+      <button id="againV">MAIN LAGI</button><br>
+      <button id="toMenuV" class="b-gray">MENU UTAMA</button>
+    </div>
+  </div>
+  <div id="over" class="overlay hidden">
+    <div class="card">
+      <h2>Permainan Selesai!</h2>
+      <div class="rankmsg" id="rankMsg"></div>
+      <div class="stats">
+        <div><b id="fScore">0</b><span>Skor akhir</span></div>
+        <div><b id="fOk">0</b><span>Sampah benar</span></div>
+        <div><b id="fBad">0</b><span>Sampah salah</span></div>
+        <div><b id="fAcc">0%</b><span>Akurasi</span></div>
+      </div>
+      <button id="again">MAIN LAGI</button><br>
+      <button id="toMenu" class="b-gray">MENU UTAMA</button>
+    </div>
+  </div>
+</div>
+<div id="mobnote" class="hidden">
+  <div class="mn-card">
+    <div class="mn-ic">📱</div>
+    <h2 id="mnTitle">Mainkan di layar penuh</h2>
+    <p id="mnText">Game ini bisa dimainkan jika perangkat dalam mode <b>layar penuh</b> atau posisi <b>landscape</b> (miring).</p>
+    <button data-fs="enter">⛶ LAYAR PENUH</button>
+    <button id="mnOk" class="b-gray">LANJUT</button>
+  </div>
+</div>
+<script src="game.js"></script>
+<script src="layar.js"></script>
+</body>
+</html>
